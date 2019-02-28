@@ -2,9 +2,12 @@
 ## Quick view
 This is a Web Application which controls states of CD6871X3.7.3 board display segments, turning those on or off, by clicking on corresponding segment on SVG image in client interface page on Web Browser. It uses arduino to communicate between PC and device. On PC it uses nodejs to communicate between arduino and client interface (web browser).
 ## Design
-![Device](Device.jpg)
-![Web Browser](WebBrowser.jpg)
-![Application](Application.png)
+![Device](images/Device.jpg)
+*Picture of device*  
+![Web Browser](images/WebBrowser.jpg)
+*Picture of Client Interface on Web Browser*  
+![Application](images/Application.png)
+*Graphical description of connections and functionallity of application*  
 ### CD6871X3.7.3 Board
 This is front panel board from car radio. It have push buttons and 156 segment LCD display with background light, which is supplied separately with 12V. Background light draws approximately 400mA so it must be supplied from additional source (not from PC). I reccomend 12V/1A supply. The rest of board is supplied with 5V and draws current less than 100mA. Display have 8 14-segment characters for messages, have one one 7-segment character for number, some status segments, equalizer segments, etc... Display is controlled by `SC75823E` chip, which communicates with Arduino using CCB format communication, receiving data through three communication pins: `DI` - data, `CLK` - clock pulses, and `CE`, and turns display segments on or off, depending on received data. For more details about this communication format, look at datasheet for this chip:  
 [http://www.picbasic.ru/_fr/13/SC75823e.pdf](http://www.picbasic.ru/_fr/13/SC75823e.pdf)  
@@ -35,11 +38,11 @@ Second number consists of `D9`, `D10`, `D11`, `D12`, `D13`, `D14`, `D15` and `D1
 20th number cosists of `D153`, `D154`, `D155`, `D156`, `DR`, `SC`, `BU` and `reserved`  
 Bits from `D1` to `D156` are bits for display segments states (data bits). `DR`, `SC` and `BU` are control bits. For common use, they should be set to logical `0`, otherwise device will not turn segments on. More about it can be found in `SC75823E` datasheet:  
 [http://www.picbasic.ru/_fr/13/SC75823e.pdf](http://www.picbasic.ru/_fr/13/SC75823e.pdf)  
-State of reserved bit does not affect communication. Commonly it's logical `0`.
+State of `reserved` bit does not affect communication. Commonly it's logical `0`.
 ### Node.js - Arduino
 Node.js executable script receives data transfer array through WebSocket and converts those in array of 20 characters. Values and order of bits remains unchanged. After that, Node.js sends command `d` to arduino, followed with chars from converted data transfer array in same order.  
 Example of all segments off (data sequence):  
-`'d' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0'`  
+`d' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0' '\0'`  
 Example of all segments on (data sequence):  
 `'d' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xff' '\0xf0'`  
 ### Arduino - CD6871X3.7.3 Board
