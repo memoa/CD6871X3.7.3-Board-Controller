@@ -1,0 +1,28 @@
+path:hover {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
+#lbarc:hover path {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
+#lbare:hover path {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
+#mbarc:hover path {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
+#mbare:hover path {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
+#rbarc:hover path {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
+#rbare:hover path {
+  stroke: white !important;
+  stroke-width: 1px !important;
+}
