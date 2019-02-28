@@ -2,12 +2,15 @@
 ## Quick view
 This is a Web Application which controls states of CD6871X3.7.3 board display segments, turning those on or off, by clicking on corresponding segment on SVG image in client interface page on Web Browser. It uses arduino to communicate between PC and device. On PC it uses nodejs to communicate between arduino and client interface (web browser).
 ## Design
-![Device](images/Device.jpg)
+![Device](images/Device.jpg)  
 *Picture of device*  
-![Web Browser](images/WebBrowser.jpg)
+  
+![Web Browser](images/WebBrowser.jpg)  
 *Picture of Client Interface on Web Browser*  
-![Application](images/Application.png)
+  
+![Application](images/Application.png)  
 *Graphical description of connections and functionallity of application*  
+  
 ### CD6871X3.7.3 Board
 This is front panel board from car radio. It have push buttons and 156 segment LCD display with background light, which is supplied separately with 12V. Background light draws approximately 400mA so it must be supplied from additional source (not from PC). I reccomend 12V/1A supply. The rest of board is supplied with 5V and draws current less than 100mA. Display have 8 14-segment characters for messages, have one one 7-segment character for number, some status segments, equalizer segments, etc... Display is controlled by `SC75823E` chip, which communicates with Arduino using CCB format communication, receiving data through three communication pins: `DI` - data, `CLK` - clock pulses, and `CE`, and turns display segments on or off, depending on received data. For more details about this communication format, look at datasheet for this chip:  
 [http://www.picbasic.ru/_fr/13/SC75823e.pdf](http://www.picbasic.ru/_fr/13/SC75823e.pdf)  
