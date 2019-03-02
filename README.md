@@ -45,6 +45,7 @@ State of `reserved` bit does not affect communication. Commonly it's logical `0`
 ### Node.js - Arduino
 Node.js executable script receives data transfer array through WebSocket and converts those in array of 20 characters. Values and order of bits remains unchanged. After that, Node.js sends command `d` to arduino, followed with chars from converted data transfer array in same order.  
 Example of all segments off (data sequence):  
+---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----  
 `d`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`|`\0`  
 ---|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----  
 Example of all segments on (data sequence):  
