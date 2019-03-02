@@ -45,12 +45,9 @@ State of `reserved` bit does not affect communication. Commonly it's logical `0`
 ### Node.js - Arduino
 Node.js executable script receives data transfer array through WebSocket and converts those in array of 20 characters. Values and order of bits remains unchanged. After that, Node.js sends command `d` to arduino, followed with chars from converted data transfer array in same order.  
 Example of all segments off (data sequence):  
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---  
 `d` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0` | `\0`  
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---  
 Example of all segments on (data sequence):  
 `d`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`|`\xff`  
--|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-  
 ### Arduino - CD6871X3.7.3 Board
 Arduino receives transfer data array through serial port, preceded with command 'd' and executes its function `serialTransferData` which implements serial data transfer protocol for LCD Driver chip `SC75823E`. This protocol consists of sending CCB address of 1 byte to device, which must be `0x41`, otherwise chip will not accept further data. After that, function translates data transfer array to binary format and sends it to device. All address and data bits are send through `DI` line, with clock pulses through `CLK` line. For every single data or address bit, one clock pulse is send. `CE` line is used to mark address bits. Arduino uses first version of serial data transfer format, when `CL` is stopped at the low level. For more details about this, see `SC75823E` datasheet:  
 [http://www.picbasic.ru/_fr/13/SC75823e.pdf](http://www.picbasic.ru/_fr/13/SC75823e.pdf)
