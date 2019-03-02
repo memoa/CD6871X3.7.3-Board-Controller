@@ -51,7 +51,3 @@ Example of all segments on (data sequence):
 ### Arduino - CD6871X3.7.3 Board
 Arduino receives transfer data array through serial port, preceded with command 'd' and executes its function `serialTransferData` which implements serial data transfer protocol for LCD Driver chip `SC75823E`. This protocol consists of sending CCB address of 1 byte to device, which must be `0x41`, otherwise chip will not accept further data. After that, function translates data transfer array to binary format and sends it to device. All address and data bits are send through `DI` line, with clock pulses through `CLK` line. For every single data or address bit, one clock pulse is send. `CE` line is used to mark address bits. Arduino uses first version of serial data transfer format, when `CL` is stopped at the low level. For more details about this, see `SC75823E` datasheet:  
 [http://www.picbasic.ru/_fr/13/SC75823e.pdf](http://www.picbasic.ru/_fr/13/SC75823e.pdf)
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
